@@ -22,6 +22,7 @@ This repository contains the material for the First Pair Assignment in Introduct
 |---------------|--------------|
 |**Data_Assignment01.R** | loads necessary data and packages |
 |**analysis_dataset01.R** | analytical investigation into airline safety data |
+|**Alcohol_Consumption.R**| analytical investigation of drinking |
 
 The later files are linked to the Descriptive Statistics files - which are then both linked to our basic script.
 
