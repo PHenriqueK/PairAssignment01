@@ -6,16 +6,6 @@
 ## Platform: x86_64-apple-darwin13.4.0 (64-bit)
 ####################
 
-rm(list=ls())
-
-#Load packages
-library(rio)
-library(ggplot2)
-library(pastecs)
-
-#Load fivethirtyeight data set
-Alchohol_Raw <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/alcohol-consumption/drinks.csv")
-
 #Renames the "total_litres_of_pure_alcohol" column to "Total_Alc"
 Total_Alc <- Alchohol_Raw$total_litres_of_pure_alcohol
 
