@@ -6,16 +6,6 @@
 ## Platform: x86_64-apple-darwin13.4.0 (64-bit)
 ####################
 
-rm(list=ls())
-
-#Load packages
-library(rio)
-library(ggplot2)
-library(pastecs)
-
-#Load fivethirtyeight data set
-Alchohol_Raw <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/alcohol-consumption/drinks.csv")
-
 #Renames the "total_litres_of_pure_alcohol" column to "Total_Alc"
 Total_Alc <- Alchohol_Raw$total_litres_of_pure_alcohol
 
@@ -54,11 +44,5 @@ barplot(ServingsMatrix, main = "Top Four Alcohol Consumers",
 
 #Bar plots for top consumers of each type
 
-#Practice bar plot (Not for final Assignment 1)
-top6 <- head(Alchohol_Raw)
-beer_servings <- Alchohol_Raw$beer_servings
-barplot(top6$beer_servings, main = "Beer Servings", xlab = "Country", ylab = "Liters",
-        names.arg = c("Afghanistan", "Albania", "Algeria", "Andorra", "Angola",
-                      "Antigua & Barbuda"), 
-        border = "black", col = "blue")
+
 
