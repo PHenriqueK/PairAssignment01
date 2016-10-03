@@ -91,3 +91,15 @@ qplot (incidents_85_99_adj, incidents_00_14_adj, data = AirlineSafety, label = A
   geom_point() +
   geom_text (aes(label=ifelse (incidents_00_14_adj>200 | incidents_85_99_adj>400, 
                                as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
+
+# Creating a safety score according to "Should Travelers Avoid Flying Airlines That Have 
+# Had Crashes in the Past?" on fivethirtyeight
+
+# adding the safety scores for each category of incidents 
+# (safety score = overall mean of incident category in period y - number of incident of airline) 
+
+fun_score <- function(x) { 
+  ((mean (x) - x) * sqrt(AirlineSafety)
+}
+
+AirlineSafety$incidents_85_99_score <- mean(AirlineSafety$incidents_85_99)-AirlineSafety$incidents_85_99
