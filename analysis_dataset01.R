@@ -9,7 +9,7 @@
 
 # Set working directory
 try(setwd("/Users/Paulo/GitHub/PairAssignment01"),silent=TRUE)
-try(setwd(""),silent=TRUE) ##working directory is misssing!
+try(setwd("/Users/djm113/Documents/GitHub/PairAssignment01"),silent=TRUE)
 getwd()
 
 # Dynamical Link to first R script file
@@ -24,6 +24,12 @@ fun_adjkm <- function(x){
   (x / AirlineSafety$avail_seat_km_per_week)*1000000000
 }
 
+for (i in 3:8) {
+  AirlineSafety[, 3:8] +
+    fun_adjkm(i) +
+    round(digits = 3) +
+    paste(names(AirlineSafety)[i], ., "_adj")
+}
 incidents_00_14_adj <- fun_adjkm(AirlineSafety$incidents_00_14)
 incidents_85_99_adj <- fun_adjkm(AirlineSafety$incidents_85_99)
 fatalities_00_14_adj <- fun_adjkm(AirlineSafety$fatalities_00_14)

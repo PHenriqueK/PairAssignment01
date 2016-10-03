@@ -17,7 +17,7 @@ library(pastecs)
 
 # Set working directory
 try(setwd("/Users/Paulo/GitHub/PairAssignment01"),silent=TRUE)
-try(setwd(""),silent=TRUE) ##working directory is misssing!
+try(setwd("/Users/djm113/Documents/GitHub/PairAssignment01"),silent=TRUE)
 getwd()
 
 # Load Dataset 1 from fivethirthyeight: airline safety 
