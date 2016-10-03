@@ -25,5 +25,5 @@ AirlineSafety <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/dat
 names(AirlineSafety)
 
 # Load Dataset 2 from fivethirtyeight: worldwide alcohol consumption 
-Alchohol_Raw <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/alcohol-consumption/drinks.csv")
+Alcohol_Raw <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/alcohol-consumption/drinks.csv")
 names(Alcohol_Raw)
