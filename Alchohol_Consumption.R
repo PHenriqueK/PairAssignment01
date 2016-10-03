@@ -7,34 +7,49 @@
 ## What it does: run descriptive statistics & data analysis
 ####################
 
+setwd("/Users/djm113/Documents/GitHub/PairAssignment01")
+setwd("/Users/Paulo/GitHub/PairAssignment01")
+
+#Loading data
+source("Data_Assignment01.R")
+
 #Renames the "total_litres_of_pure_alcohol" column to "Total_Alc"
-Total_Alc <- Alchohol_Raw$total_litres_of_pure_alcohol
+Total_Alc <- Alcohol_Raw$total_litres_of_pure_alcohol
 
 #Descriptive Statistics 
-summary(Alchohol_Raw$beer_servings)
-summary(Alchohol_Raw$spirit_servings)
-summary(Alchohol_Raw$wine_servings)
+summary(Alcohol_Raw$beer_servings)
+summary(Alcohol_Raw$spirit_servings)
+summary(Alcohol_Raw$wine_servings)
 summary(Total_Alc)
 
-stat.desc(Alchohol_Raw, basic = FALSE)
+stat.desc(Alcohol_Raw, basic = FALSE)
 
 #Histograms
-hist(Alchohol_Raw$beer_servings)
-hist(Alchohol_Raw$spirit_servings)
-hist(Alchohol_Raw$wine_servings)
+hist(Alcohol_Raw$beer_servings)
+hist(Alcohol_Raw$spirit_servings)
+hist(Alcohol_Raw$wine_servings)
 hist(Total_Alc)
 
 #Correlation Table
-cor(Alchohol_Raw[-1], method = "pearson")
+cor(Alcohol_Raw[-1], method = "pearson")
 
 #Plot beer consumption & total litres of pure alcohol consumed
-plot(Alchohol_Raw$beer_servings, Total_Alc)
-abline(lm(Total_Alc~Alchohol_Raw$beer_servings))
-text(Alchohol_Raw$beer_servings, Total_Alc, labels = Alchohol_Raw$country,
+plot(Alcohol_Raw$beer_servings, Total_Alc)
+abline(lm(Total_Alc~Alcohol_Raw$beer_servings))
+text(Alcohol_Raw$beer_servings, Total_Alc, labels = Alcohol_Raw$country,
+     xlab = "Beer Servings", ylab = "Total Alcohol",
      cex = .5, pos = 4, col = "red")
 
+#Plot for total litres of pure alcohol consumed & beer consumption
+qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$beer_servings,
+      data = Alcohol_Raw, label = Alcohol_Raw$country,
+      xlab = "Litres of Pure Alcohol", ylab = "Beer Servings",
+      main = "Beer Consumption") + 
+  geom_smooth (method = "lm", se = FALSE)
+
+
 #Group bar plot of top four consumers
-Top4 <- subset.data.frame(Alchohol_Raw, Total_Alc >= 11.9)
+Top4 <- subset.data.frame(Alcohol_Raw, Total_Alc >= 11.9)
 Top4Matrix <- t(Top4[-1])
 ServingsMatrix <- Top4Matrix[1:3, 1:4]
 colnames(ServingsMatrix) <- Top4$country
