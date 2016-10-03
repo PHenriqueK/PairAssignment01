@@ -1,9 +1,10 @@
 #####################
-## R Source to First Pair Assignment: Second Data Set
+## R source to first pair assignment: second data set
 ## Dan Murphy & Paulo Kalkhake
-## 1 October 2016
-## R version 3.3.1 (2016-06-21) -- "Bug in Your Hair" 
+## Latest Update: 3 October 2016
+## R version 3.3.1 (2016-06-21) -- "Bug in Your Hair"
 ## Platform: x86_64-apple-darwin13.4.0 (64-bit)
+## What it does: run descriptive statistics & data analysis
 ####################
 
 #Renames the "total_litres_of_pure_alcohol" column to "Total_Alc"
