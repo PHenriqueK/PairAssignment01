@@ -47,9 +47,3 @@ open first scrip.r
 near top source script
 
 source command
-
-
-<<<<<<< HEAD
-This is a testhh
-=======
->>>>>>> Paulo
