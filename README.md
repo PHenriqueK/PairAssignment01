@@ -10,8 +10,8 @@ This repository contains the material for the First Pair Assignment in Introduct
 
 | Name                    | k |
 | ----------------------- | --------------------- | 
-| Airline Safety Record     | [Article on fivethirthyeight](https://google.com)                   | 
-| World Wide Alcohol Consumption       | [Article on fivethirthyeight](https://google.com)        |
+| Airline Safety Record     | [Article on fivethirthyeight](http://fivethirtyeight.com/features/should-travelers-avoid-flying-airlines-that-have-had-crashes-in-the-past/)                   | 
+| World Wide Alcohol Consumption       | [Article on fivethirthyeight](http://fivethirtyeight.com/datalab/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/)        |
 
 ##Assignment 
 
