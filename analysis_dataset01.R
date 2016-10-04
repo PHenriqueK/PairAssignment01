@@ -24,78 +24,66 @@ fun_adjkm <- function(x){
   (x / AirlineSafety$avail_seat_km_per_week)*1000000000
 }
 
-for (i in 3:8) {
-  AirlineSafety[, 3:8] +
-    fun_adjkm(i) +
-    round(digits = 3) +
-    paste(names(AirlineSafety)[i], ., "_adj")
-}
-incidents_00_14_adj <- fun_adjkm(AirlineSafety$incidents_00_14)
-incidents_85_99_adj <- fun_adjkm(AirlineSafety$incidents_85_99)
-fatalities_00_14_adj <- fun_adjkm(AirlineSafety$fatalities_00_14)
-fatalities_85_99_adj <- fun_adjkm(AirlineSafety$fatalities_85_99)
-fat_accidents_85_99_adj <- fun_adjkm(AirlineSafety$fatal_accidents_85_99)
-fat_accidents_00_14_adj <- fun_adjkm(AirlineSafety$fatal_accidents_00_14)
+# creating subset of data, adjusting for seat km & merging with airline
 
-# creating a new data frame with adjusted data
-AirlineSafety_adj <- data.frame(AirlineSafety$airline, incidents_85_99_adj, incidents_00_14_adj, 
-                                fatalities_85_99_adj, fatalities_00_14_adj, fat_accidents_85_99_adj, 
-                                fat_accidents_00_14_adj)
+AirlineSafety_adj <- AirlineSafety[, c(3:8)]
+fun_adjkm(AirlineSafety_adj)
+AirlineSafety_adj$airline <- AirlineSafety$airline
 
 # descriptive statistics for adjusted data
 summary (AirlineSafety_adj)
 stat.desc(AirlineSafety_adj, basic = FALSE)
 
 # histograms for adjusted data 
-hist (incidents_85_99_adj,
+hist (AirlineSafety_adj$incidents_85_99,
       main="Incidents between 1985 and 1999", 
       col="blue", 
       breaks = 20,
       xlab = "Incidents",
       ylab = "Number of Incidents")
-hist (incidents_00_14_adj)
-hist (fatalities_85_99_adj)
-hist (fatalities_00_14_adj)
-hist (fat_accidents_85_99_adj)
-hist (fat_accidents_00_14_adj)
+hist (AirlineSafety_adj$incidents_00_14)
+hist (AirlineSafety_adj$fatalities_85_99)
+hist (AirlineSafety_adj$fatalities_00_14)
+hist (AirlineSafety_adj$fat_accidents_85_99)
+hist (AirlineSafety_adj$fat_accidents_00_14)
 
 # running a paired t-test
-t.test(incidents_85_99_adj, incidents_00_14_adj, paired = TRUE)
-t.test(fatalities_85_99_adj, fatalities_00_14_adj, paired = TRUE)
-t.test(fat_accidents_85_99_adj, fat_accidents_00_14_adj, paired = TRUE)
+t.test(AirlineSafety_adj$incidents_85_99, AirlineSafety_adj$incidents_00_14, paired = TRUE)
+t.test(AirlineSafety_adj$fatalities_85_99, AirlineSafety_adj$fatalities_00_14, paired = TRUE)
+t.test(AirlineSafety_adj$fat_accidents_85_99, AirlineSafety_adj$fat_accidents_00_14, paired = TRUE)
 
 # correlation table of naked data
-cor(AirlineSafety[-1], method = "pearson")
+cor(AirlineSafety_adj[-1], method = "pearson")
 
 # correlation table of adjusted data
-AirlineSafety_Safety <- t()
+AirlineSafety_adj <- t()
 cor()
     
 # Creating a Plot for fatalities by Airline
-qplot (fatalities_85_99_adj, fatalities_00_14_adj, data = AirlineSafety, label = AirlineSafety$airline,
+qplot (AirlineSafety_adj$fatalities_85_99, AirlineSafety_adj$fatalities_00_14, data = AirlineSafety_adj, label = AirlineSafety$airline,
        xlab = "1985 - 1999", ylab = "2000 - 2014",
        main = "Fatalities by Airline" ) +
   geom_smooth (method = "lm", se = FALSE) +
   geom_point() +
-  geom_text (aes(label=ifelse (fatalities_00_14_adj>200 | fatalities_85_99_adj>400, 
+  geom_text (aes(label=ifelse (AirlineSafety_adj$fatalities_00_14>200 | AirlineSafety_adj$fatalities_85_99>400, 
                                as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
 
 # Creating a plot for fatal accidents by Airline
-qplot (fat_accidents_85_99_adj, fat_accidents_00_14_adj, data = AirlineSafety, label = AirlineSafety$airline,
+qplot (AirlineSafety_adj$fat_accidents_85_99, AirlineSafety_adj$fat_accidents_00_14, data = AirlineSafety_adj, label = AirlineSafety$airline,
        xlab = "1985 - 1999", ylab = "2000 - 2014",
        main = "Fatal Accidents by Airline" ) +
   geom_smooth (method = "lm", se = FALSE) +
   geom_point() +
-  geom_text (aes(label=ifelse (fat_accidents_00_14_adj>200 || fat_accidents_85_99_adj>400, 
+  geom_text (aes(label=ifelse (AirlineSafety_adj$fat_accidents_00_14>200 || AirlineSafety_adj$fat_accidents_85_99>400, 
                                as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
 
 # Creating a plot for incidents by Airline
-qplot (incidents_85_99_adj, incidents_00_14_adj, data = AirlineSafety, label = AirlineSafety$airline,
+qplot (AirlineSafety_adj$incidents_85_99, AirlineSafety_adj$incidents_00_14, data = AirlineSafety_adj, label = AirlineSafety$airline,
        xlab = "1985 - 1999", ylab = "2000 - 2014",
        main = "Incidents by Airline" ) +
   geom_smooth (method = "lm", se = FALSE) +
   geom_point() +
-  geom_text (aes(label=ifelse (incidents_00_14_adj>200 | incidents_85_99_adj>400, 
+  geom_text (aes(label=ifelse (AirlineSafety_adj$incidents_00_14>200 | AirlineSafety_adj$incidents_85_99>400, 
                                as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
 
 # Creating a safety score according to "Should Travelers Avoid Flying Airlines That Have 
@@ -105,7 +93,7 @@ qplot (incidents_85_99_adj, incidents_00_14_adj, data = AirlineSafety, label = A
 # (safety score = overall mean of incident category in period y - number of incident of airline) 
 
 fun_score <- function(x) { 
-  ((mean (x) - x) * sqrt(AirlineSafety)
+  ((mean (x) - x) * sqrt(AirlineSafety_adj)
 }
 
 AirlineSafety$incidents_85_99_score <- mean(AirlineSafety$incidents_85_99)-AirlineSafety$incidents_85_99
