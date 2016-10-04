@@ -86,7 +86,6 @@ barplot(ServingsMatrix, main = "Top Four Alcohol Consumers",
         args.legend = list(x = "topright", cex = .7), beside = TRUE)
 
 
-#Bar plots for top consumers of each type
 
 
 
