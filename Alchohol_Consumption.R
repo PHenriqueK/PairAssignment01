@@ -13,25 +13,36 @@ setwd("/Users/Paulo/GitHub/PairAssignment01")
 #Loading data
 source("Data_Assignment01.R")
 
+
 #Renames the "total_litres_of_pure_alcohol" column to "Total_Alc"
 Total_Alc <- Alcohol_Raw$total_litres_of_pure_alcohol
 
+
 #Descriptive Statistics 
 summary(Alcohol_Raw$beer_servings)
+
 summary(Alcohol_Raw$spirit_servings)
+
 summary(Alcohol_Raw$wine_servings)
+
 summary(Total_Alc)
 
 stat.desc(Alcohol_Raw, basic = FALSE)
 
+
 #Histograms
-hist(Alcohol_Raw$beer_servings)
-hist(Alcohol_Raw$spirit_servings)
-hist(Alcohol_Raw$wine_servings)
-hist(Total_Alc)
+hist(Alcohol_Raw$beer_servings, main = "Beer Servings Histogram", xlab = "Beer Servings")
+
+hist(Alcohol_Raw$spirit_servings, main = "Spirit Servings Histogram", xlab = "Spirit Servings")
+
+hist(Alcohol_Raw$wine_servings, main = "Wine Servings Histogram", xlab = "Wine Servings")
+
+hist(Total_Alc, main = "Alcohol Consumption Histogram", xlab = "Litres of Alcohol Consumed")
+
 
 #Correlation Table
 cor(Alcohol_Raw[-1], method = "pearson")
+
 
 #Plot beer consumption & total litres of pure alcohol consumed
 plot(Alcohol_Raw$beer_servings, Total_Alc)
@@ -39,6 +50,7 @@ abline(lm(Total_Alc~Alcohol_Raw$beer_servings))
 text(Alcohol_Raw$beer_servings, Total_Alc, labels = Alcohol_Raw$country,
      xlab = "Beer Servings", ylab = "Total Alcohol",
      cex = .5, pos = 4, col = "red")
+
 
 #Plot for total litres of pure alcohol consumed & beer consumption
 qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$beer_servings,
@@ -48,15 +60,31 @@ qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$beer_servings,
   geom_smooth (method = "lm", se = FALSE)
 
 
+#Plot for total litres of pure alcohol consumed & wine consumption
+qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$wine_servings,
+      data = Alcohol_Raw, label = Alcohol_Raw$country,
+      xlab = "Litres of Pure Alcohol", ylab = "Wine Servings",
+      main = "Wine Consumption") + 
+  geom_smooth (method = "lm", se = FALSE)
+
+
+#Plot for total litres of pure alcohol consumed & spirit consumption
+qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$spirit_servings,
+      data = Alcohol_Raw, label = Alcohol_Raw$country,
+      xlab = "Litres of Pure Alcohol", ylab = "Spirit Servings",
+      main = "Spirit Consumption") + 
+  geom_smooth (method = "lm", se = FALSE)
+
+
 #Group bar plot of top four consumers
 Top4 <- subset.data.frame(Alcohol_Raw, Total_Alc >= 11.9)
 Top4Matrix <- t(Top4[-1])
 ServingsMatrix <- Top4Matrix[1:3, 1:4]
 colnames(ServingsMatrix) <- Top4$country
 barplot(ServingsMatrix, main = "Top Four Alcohol Consumers",
-        ylab = "Servings", xlab ="Country", 
-        legend = c("Beer", "Spirits", "Wine"), 
+        ylab = "Servings", xlab ="Country", legend = c("Beer", "Spirits", "Wine"), 
         args.legend = list(x = "topright", cex = .7), beside = TRUE)
+
 
 #Bar plots for top consumers of each type
 
