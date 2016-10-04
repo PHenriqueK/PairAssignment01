@@ -30,7 +30,7 @@ summary(Total_Alc)
 stat.desc(Alcohol_Raw, basic = FALSE)
 
 
-#Histograms
+#Histograms and stuff
 hist(Alcohol_Raw$beer_servings, main = "Beer Servings Histogram", xlab = "Beer Servings")
 
 hist(Alcohol_Raw$spirit_servings, main = "Spirit Servings Histogram", xlab = "Spirit Servings")
