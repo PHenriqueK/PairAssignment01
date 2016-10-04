@@ -8,7 +8,7 @@ This repository contains the material for the First Pair Assignment in Introduct
 
 ##Investigated Data Sets
 
-| Name                    | k |
+| Topic                    | Link |
 | ----------------------- | --------------------- | 
 | Airline Safety Record     | [Should Travelers Avoid Flying Airlines That Have Had Crashes In The Past?](http://fivethirtyeight.com/features/should-travelers-avoid-flying-airlines-that-have-had-crashes-in-the-past/)                   | 
 | Global Alcohol Consumption       | [Where Do People Drink The Most Beer, Wine, And Spirits?](http://fivethirtyeight.com/datalab/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/)        |
@@ -26,8 +26,8 @@ The second data set also comes from fivethirtyeight, and deals with global alcoh
 | R source code | What it does |
 |---------------|--------------|
 |**Data_Assignment01.R** | loads necessary data and packages |
-|**analysis_dataset01.R** | analytical investigation into airline safety data |
-|**Alcohol_Consumption.R**| analytical investigation of drinking |
+|**analysis_dataset01.R** | analytical investigation of airline safety records |
+|**Alcohol_Consumption.R**| analytical investigation of global drinking trends |
 
 The later files are linked to the Descriptive Statistics files - which are then both linked to our basic script.
 
