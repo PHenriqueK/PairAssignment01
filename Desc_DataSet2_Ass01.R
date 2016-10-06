@@ -34,13 +34,33 @@ stat.desc(Alcohol_Raw, basic = FALSE)
 
 
 #Histograms
-hist(Alcohol_Raw$beer_servings, main = "Beer Servings Histogram", xlab = "Beer Servings")
+hist(Alcohol_Raw$beer_servings, 
+     main = "Beer Servings Histogram", 
+     xlim = c(0, 400),
+     xlab = "Beer Servings",
+     breaks = 20,
+     col = "Blue")
 
-hist(Alcohol_Raw$spirit_servings, main = "Spirit Servings Histogram", xlab = "Spirit Servings")
+hist(Alcohol_Raw$spirit_servings, 
+     main = "Spirit Servings Histogram", 
+     xlab = "Spirit Servings",
+     xlim = c(0, 400),
+     breaks = 20,
+     col = "Blue")
 
-hist(Alcohol_Raw$wine_servings, main = "Wine Servings Histogram", xlab = "Wine Servings")
+hist(Alcohol_Raw$wine_servings, 
+     main = "Wine Servings Histogram", 
+     xlab = "Wine Servings",
+     xlim = c(0, 400),
+     breaks = 20,
+     col = "Blue")
 
-hist(Total_Alc, main = "Alcohol Consumption Histogram", xlab = "Litres of Alcohol Consumed")
+hist(Total_Alc, 
+     main = "Alcohol Consumption Histogram", 
+     xlab = "Litres of Alcohol Consumed",
+     ylim = c(0,50),
+     breaks = 20,
+     col = "Blue")
 
 
 #Correlation Table
@@ -50,7 +70,8 @@ cor(Alcohol_Raw[-1], method = "pearson")
 #Plot for total litres of pure alcohol consumed & beer consumption
 qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$beer_servings,
       data = Alcohol_Raw, label = Alcohol_Raw$country,
-      xlab = "Litres of Pure Alcohol", ylab = "Beer Servings",
+      xlab = "Litres of Pure Alcohol", 
+      ylab = "Beer Servings",
       main = "Beer Consumption") + 
   geom_smooth (method = "lm", se = FALSE)
 
@@ -58,7 +79,8 @@ qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$beer_servings,
 #Plot for total litres of pure alcohol consumed & wine consumption
 qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$wine_servings,
       data = Alcohol_Raw, label = Alcohol_Raw$country,
-      xlab = "Litres of Pure Alcohol", ylab = "Wine Servings",
+      xlab = "Litres of Pure Alcohol", 
+      ylab = "Wine Servings",
       main = "Wine Consumption") + 
   geom_smooth (method = "lm", se = FALSE)
 
@@ -66,7 +88,8 @@ qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$wine_servings,
 #Plot for total litres of pure alcohol consumed & spirit consumption
 qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$spirit_servings,
       data = Alcohol_Raw, label = Alcohol_Raw$country,
-      xlab = "Litres of Pure Alcohol", ylab = "Spirit Servings",
+      xlab = "Litres of Pure Alcohol", 
+      ylab = "Spirit Servings",
       main = "Spirit Consumption") + 
   geom_smooth (method = "lm", se = FALSE)
 
@@ -77,7 +100,10 @@ Top4Matrix <- t(Top4[-1])
 ServingsMatrix <- Top4Matrix[1:3, 1:4]
 colnames(ServingsMatrix) <- Top4$country
 barplot(ServingsMatrix, main = "Top Four Alcohol Consumers",
-        ylab = "Servings", xlab ="Country", legend = c("Beer", "Spirits", "Wine"), 
+        ylab = "Servings", 
+        xlab ="Country",
+        ylim = c(0, 500),
+        legend = c("Beer", "Spirits", "Wine"),
         args.legend = list(x = "topright", cex = .7), beside = TRUE)
 
 
