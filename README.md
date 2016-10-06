@@ -13,11 +13,11 @@ This repository contains the material for the First Pair Assignment in Introduct
 | Airline Safety Record     | [Should Travelers Avoid Flying Airlines That Have Had Crashes In The Past?](http://fivethirtyeight.com/features/should-travelers-avoid-flying-airlines-that-have-had-crashes-in-the-past/)                   | 
 | Global Alcohol Consumption       | [Where Do People Drink The Most Beer, Wine, And Spirits?](http://fivethirtyeight.com/datalab/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/)        |
 
-The first data set is from fivethirtyeight and based on the Aviation Safety Network’s database. It breaks down the number of incidents, fatal accidents, and fatalities in 56 airlines. These incidents, accidents, and fatalities are separated into two groups, those that occured in between 1985 to 1999 and those that occured between 2000 and 2014. The data set also includes the available seat kilometers per week for each airline, which fivethirtyeight defines as the number of seats multiplie by the number of kilometres the airline flies. 
+The first data set is from fivethirtyeight.com and is based on the Aviation Safety Network’s database. It breaks down the number of incidents, fatal accidents, and fatalities in 56 airlines. These incidents, accidents, and fatalities are separated into two groups, those that occured in between 1985 to 1999 and those that occured between 2000 and 2014. The data set also includes the available seat kilometers per week for each airline, which fivethirtyeight defines as the number of seats multiplied by the number of kilometres the airline flies. 
 
-The second data set also comes from fivethirtyeight, and deals with global alcohol consumption trends. Specifically, it provides the World Health Organization's (WHO) data for the total litres of alcohol consumed per person in 193 countries around the world in 2010. It also includes adjusted data showing the number of servings of beer, wine, and spirits consumed by each person in 2010. 
+The second data set also comes from fivethirtyeight.com, and deals with global alcohol consumption. Specifically, it provides the World Health Organization's (WHO) data for the total litres of alcohol consumed per person in 193 countries around the world in 2010. It also includes adjusted data showing the number of servings of beer, wine, and spirits consumed by each person. 
 
-We performed basic transformations on the data, and illustrated the datas' distributions using a variety relevant of descriptive statistics. 
+We performed basic transformations on the data, and illustrated the data's distributions using a variety relevant of descriptive statistics. 
 
 ##Guide for R source code
 

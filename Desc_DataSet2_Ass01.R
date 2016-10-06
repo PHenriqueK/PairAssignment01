@@ -93,7 +93,6 @@ qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$spirit_servings,
       main = "Spirit Consumption") + 
   geom_smooth (method = "lm", se = FALSE)
 
-
 #Group bar plot of top four consumers
 Top4 <- subset.data.frame(Alcohol_Raw, Total_Alc >= 11.9)
 Top4Matrix <- t(Top4[-1])

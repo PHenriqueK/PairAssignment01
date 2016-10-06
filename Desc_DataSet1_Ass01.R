@@ -12,7 +12,7 @@ try(setwd("/Users/Paulo/GitHub/PairAssignment01"),silent=TRUE)
 try(setwd("/Users/djm113/Documents/GitHub/PairAssignment01"),silent=TRUE)
 getwd()
 
-# Dynamical Link to first R script file
+# Dynamical Link to Data/Packages R script file
 source("Data_Assignment01.R")
 
 # descriptive statistics of naked data using
@@ -100,40 +100,34 @@ AirlineSafety_adj <- t()
 cor()
     
 # Creating a Plot for fatalities by Airline
-qplot(AirlineSafety_adj$fatalities_85_99, AirlineSafety_adj$fatalities_00_14, data = AirlineSafety_adj, label = AirlineSafety$airline,
-       xlab = "1985 - 1999", ylab = "2000 - 2014",
-       main = "Fatalities by Airline" ) +
+qplot(AirlineSafety_adj$fatalities_85_99, AirlineSafety_adj$fatalities_00_14, data = AirlineSafety_adj, 
+      label = AirlineSafety_adj$airline,
+      xlab = "1985 - 1999", 
+      ylab = "2000 - 2014",
+      main = "Fatalities by Airline (adjusted for billion seat km)" ) +
   geom_smooth(method = "lm", se = FALSE) +
   geom_point() +
-  geom_text(aes(label=ifelse (AirlineSafety_adj$fatalities_00_14>200 | AirlineSafety_adj$fatalities_85_99>400, 
-                               as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
+  geom_text(aes(label=ifelse(AirlineSafety_adj$fatalities_00_14>200 | AirlineSafety_adj$fatalities_85_99>450, 
+                              as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
 
 # Creating a plot for fatal accidents by Airline
-qplot(AirlineSafety_adj$fat_accidents_85_99, AirlineSafety_adj$fat_accidents_00_14, data = AirlineSafety_adj, label = AirlineSafety$airline,
-       xlab = "1985 - 1999", ylab = "2000 - 2014",
-       main = "Fatal Accidents by Airline (adjusted for billion seat km)" ) +
+qplot(AirlineSafety_adj$fatal_accidents_85_99, AirlineSafety_adj$fatal_accidents_00_14, data = AirlineSafety_adj, 
+      label = AirlineSafety_adj$airline,
+      xlab = "1985 - 1999", 
+      ylab = "2000 - 2014",
+      main = "Fatal Accidents by Airline (adjusted for billion seat km)" ) +
   geom_smooth(method = "lm", se = FALSE) +
   geom_point () +
-  geom_text (aes(label=ifelse (AirlineSafety_adj$fat_accidents_00_14>200 || AirlineSafety_adj$fat_accidents_85_99>400, 
-                               as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
+  geom_text(aes(label=ifelse(AirlineSafety_adj$fatal_accidents_00_14>2 | AirlineSafety_adj$fatal_accidents_85_99>10, 
+                              as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
 
 # Creating a plot for incidents by Airline
-qplot(AirlineSafety_adj$incidents_85_99, AirlineSafety_adj$incidents_00_14, data = AirlineSafety_adj, label = AirlineSafety$airline,
-       xlab = "1985 - 1999", ylab = "2000 - 2014",
-       main = "Incidents by Airline (adjusted for billion seat km)" ) +
+qplot(AirlineSafety_adj$incidents_85_99, AirlineSafety_adj$incidents_00_14, data = AirlineSafety_adj, 
+      label = AirlineSafety_adj$airline,
+      xlab = "1985 - 1999", 
+      ylab = "2000 - 2014",
+      main = "Incidents by Airline (adjusted for billion seat km)" ) +
   geom_smooth(method = "lm", se = FALSE) +
   geom_point() +
-  geom_text(aes(label=ifelse (AirlineSafety_adj$incidents_00_14>200 | AirlineSafety_adj$incidents_85_99>400, 
+  geom_text(aes(label=ifelse (AirlineSafety_adj$incidents_00_14>15 | AirlineSafety_adj$incidents_85_99>20, 
                                as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
-
-# Creating a safety score according to "Should Travelers Avoid Flying Airlines That Have 
-# Had Crashes in the Past?" on fivethirtyeight
-
-# adding the safety scores for each category of incidents 
-# (safety score = overall mean of incident category in period y - number of incident of airline) 
-
-fun_score <- function(x) { 
-  ((mean (x) - x) * sqrt(AirlineSafety_adj)
-}
-
-AirlineSafety$incidents_85_99_score <- mean(AirlineSafety$incidents_85_99)-AirlineSafety$incidents_85_99

@@ -1,0 +1,128 @@
+---
+title: First Pair Assignment for Introduction to Collaborative Social Science Data
+  Analysis (MPP-E1180)
+author: "Paulo Kalkhake & Dan Murphy"
+date: "6 October 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Set working directory
+try(setwd("/Users/Paulo/GitHub/PairAssignment01"),silent=TRUE)
+try(setwd("/Users/djm113/Documents/GitHub/PairAssignment01"),silent=TRUE)
+getwd()
+
+# Dynamical Link to Data/Packages R script file
+source("Data_Assignment01.R")
+
+# adjusting for seat km (creating a function to adjust seat km)
+fun_adjkm <- function(x){ 
+  (x / AirlineSafety$avail_seat_km_per_week)*1000000000
+}
+
+# creating a new data frame adjusting for seat km 
+AirlineSafety_adj <- AirlineSafety[, c(3:8)] #create a subset of data
+fun_adjkm(AirlineSafety_adj) #adjust the data
+AirlineSafety_adj$airline <- AirlineSafety$airline #merge with airlines
+AirlineSafety_adj <- AirlineSafety_adj[,c(7,1,2,3,4,5,6)] #reorder by column number
+
+#Renames the "total_litres_of_pure_alcohol" column to "Total_Alc" in Data Set 2
+Total_Alc <- Alcohol_Raw$total_litres_of_pure_alcohol
+
+```
+
+## Description
+
+This Paper contains some of the results from the first pair assignment in Introduction to Collaborative Social Science Data Analysis (MPP-E1180). We performed basic transformations on the data, and illustrated the data's distributions using a variety relevant of descriptive statistics. 
+
+## Data Set 1: Airline Safety
+
+The first data set is from fivethirtyeight.com and is based on the Aviation Safety Network’s database. It breaks down the number of incidents, fatal accidents, and fatalities in 56 airlines. These incidents, accidents, and fatalities are separated into two groups, those that occured in between 1985 to 1999 and those that occured between 2000 and 2014. The data set also includes the available seat kilometers per week for each airline, which fivethirtyeight defines as the number of seats multiplied by the number of kilometres the airline flies. 
+
+Our analysis confirms the author's results: There seems to be no clear relationship between rate of fatal accidents in period one (1985 - 1999) and period two (2000 - 2014). 
+
+```{r, echo=FALSE, fig.width=5, fig.height=3}
+
+# Creating a Plot for fatalities by Airline
+qplot(AirlineSafety_adj$fatalities_85_99, AirlineSafety_adj$fatalities_00_14, data = AirlineSafety_adj, 
+      label = AirlineSafety_adj$airline,
+      xlab = "1985 - 1999", 
+      ylab = "2000 - 2014",
+      main = "Fatalities by Airline (adjusted for billion seat km)" ) +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_point() +
+  geom_text(aes(label=ifelse(AirlineSafety_adj$fatalities_00_14>200 | AirlineSafety_adj$fatalities_85_99>450, 
+                              as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
+```
+
+
+```{r, echo=FALSE, fig.width=5, fig.height=3}
+# Creating a plot for fatal accidents by Airline
+qplot(AirlineSafety_adj$fatal_accidents_85_99, AirlineSafety_adj$fatal_accidents_00_14, data = AirlineSafety_adj, 
+      label = AirlineSafety_adj$airline,
+      xlab = "1985 - 1999", 
+      ylab = "2000 - 2014",
+      main = "Fatal Accidents by Airline (adjusted for billion seat km)" ) +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_point () +
+  geom_text(aes(label=ifelse(AirlineSafety_adj$fatal_accidents_00_14>2 | AirlineSafety_adj$fatal_accidents_85_99>10, 
+                              as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
+
+```
+
+
+However, there seems to be some correlation, if one looks at the number of incidents, i. e. whether they resulted in a fatality or not, in both periods. 
+
+```{r, echo=FALSE, fig.width=5, fig.height=3}
+# Creating a plot for incidents by Airline
+qplot(AirlineSafety_adj$incidents_85_99, AirlineSafety_adj$incidents_00_14, data = AirlineSafety_adj, 
+      label = AirlineSafety_adj$airline,
+      xlab = "1985 - 1999", 
+      ylab = "2000 - 2014",
+      main = "Incidents by Airline (adjusted for billion seat km)" ) +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_point() +
+  geom_text(aes(label=ifelse (AirlineSafety_adj$incidents_00_14>15 | AirlineSafety_adj$incidents_85_99>20, 
+                               as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
+```
+
+\pagebreak
+
+## Data Set 2: Worldwide Alcohol Consumption in 2010
+
+The second data set also comes from fivethirtyeight.com, and deals with global alcohol consumption. Specifically, it provides the World Health Organization's (WHO) data for the total litres of alcohol consumed per person in 193 countries around the world in 2010. It also includes adjusted data showing the number of servings of beer, wine, and spirits consumed by each person. 
+
+Our analysis shows the strongest relationship between beer drinking and total litres of alcool consumed. 
+
+```{r, echo=FALSE, fig.width=5, fig.height=3}
+
+#Plot for total litres of pure alcohol consumed & beer consumption
+qplot(Alcohol_Raw$total_litres_of_pure_alcohol, Alcohol_Raw$beer_servings,
+      data = Alcohol_Raw, label = Alcohol_Raw$country,
+      xlab = "Litres of Pure Alcohol", 
+      ylab = "Beer Servings",
+      main = "Beer Consumption") + 
+  geom_smooth (method = "lm", se = FALSE)
+```
+
+
+Yet, our analysis also shows diverse drinking habits among the top four total alcohol consumers. Andorrans have the most variety in their consumption, while Belarus and Grenada show strong preferences for spirits. Of the top four, only Lithuania favors beer. 
+
+
+```{r, echo=FALSE}
+
+#Group bar plot of top four consumers
+Top4 <- subset.data.frame(Alcohol_Raw, Total_Alc >= 11.9)
+Top4Matrix <- t(Top4[-1])
+ServingsMatrix <- Top4Matrix[1:3, 1:4]
+colnames(ServingsMatrix) <- Top4$country
+barplot(ServingsMatrix, main = "Top Four Alcohol Consumers",
+        ylab = "Servings", 
+        xlab ="Country",
+        ylim = c(0, 500),
+        legend = c("Beer", "Spirits", "Wine"),
+        args.legend = list(x = "topright", cex = .7), beside = TRUE)
+
+```
