@@ -29,6 +29,7 @@ summary(Alcohol_Raw$wine_servings)
 
 summary(Total_Alc)
 
+describe(Alcohol_Raw)
 stat.desc(Alcohol_Raw, basic = FALSE)
 
 
@@ -44,14 +45,6 @@ hist(Total_Alc, main = "Alcohol Consumption Histogram", xlab = "Litres of Alcoho
 
 #Correlation Table
 cor(Alcohol_Raw[-1], method = "pearson")
-
-
-#Plot beer consumption & total litres of pure alcohol consumed
-plot(Alcohol_Raw$beer_servings, Total_Alc)
-abline(lm(Total_Alc~Alcohol_Raw$beer_servings))
-text(Alcohol_Raw$beer_servings, Total_Alc, labels = Alcohol_Raw$country,
-     xlab = "Beer Servings", ylab = "Total Alcohol",
-     cex = .5, pos = 4, col = "red")
 
 
 #Plot for total litres of pure alcohol consumed & beer consumption
