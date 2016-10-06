@@ -10,10 +10,11 @@
 # remove objects from the specified environment
 rm(list=ls())  
 
-# Load Packages: credits to Wickham Hadley, Xie Yihui, Philippe Grosejan & Frederic Ibanez
+# Load Packages: credits to Wickham Hadley, Xie Yihui, Frank Harrell Jr, Philippe Grosejan & Frederic Ibanez
 library(ggplot2)
 library(knitr)
 library(pastecs)
+library(Hmisc)
 
 # Set working directory
 try(setwd("/Users/Paulo/GitHub/PairAssignment01"),silent=TRUE)
@@ -21,7 +22,8 @@ try(setwd("/Users/djm113/Documents/GitHub/PairAssignment01"),silent=TRUE)
 getwd()
 
 # Load Dataset 1 from fivethirthyeight: airline safety 
-AirlineSafety <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/airline-safety/airline-safety.csv")
+AirlineSafety <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/airline-safety/airline-safety.csv", sep = ",", header=TRUE, stringsAsFactors=FALSE)
+AirlineSafety[, 3]  <- as.numeric(AirlineSafety[, 3]
 names(AirlineSafety)
 
 # Load Dataset 2 from fivethirtyeight: worldwide alcohol consumption 
