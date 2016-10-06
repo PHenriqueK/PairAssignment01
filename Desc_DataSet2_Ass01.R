@@ -7,8 +7,10 @@
 ## What it does: run descriptive statistics & data analysis
 ####################
 
-setwd("/Users/djm113/Documents/GitHub/PairAssignment01")
-setwd("/Users/Paulo/GitHub/PairAssignment01")
+# Set working directory
+try(setwd("/Users/Paulo/GitHub/PairAssignment01"),silent=TRUE)
+try(setwd("/Users/djm113/Documents/GitHub/PairAssignment01"),silent=TRUE)
+getwd()
 
 #Loading data
 source("Data_Assignment01.R")
