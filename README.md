@@ -25,6 +25,6 @@ The files are dynamically linked. Both descripitive statistics files automatical
 
 | R source code | What it does |
 |---------------|--------------|
-|**Data_Assignment01.R** | Loads necessary data and packages |
-|**Desc_DataSet1_Ass01.R** | Analytical investigation of airline safety records |
-|**Desc_DataSet2_Ass01.R** | Analytical investigation of global drinking trends |
+| [Data_Assignment01.R]("Data_Assignment01.R") | Loads necessary data and packages |
+| [Desc_DataSet1_Ass01.R]("Desc_DataSet1_Ass01.R") | Analytical investigation of airline safety records |
+| [Desc_DataSet2_Ass01.R]("Desc_DataSet2_Ass01.R") | Analytical investigation of global drinking trends |
