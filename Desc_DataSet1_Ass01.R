@@ -90,7 +90,7 @@ AirlineSafety_adj <- t()
 cor()
     
 # Creating a Plot for fatalities by Airline
-qplot(AirlineSafety_adj$fatalities_85_99, AirlineSafety_adj$fatalities_00_14, data = AirlineSafety_adj, 
+g1 <- qplot(AirlineSafety_adj$fatalities_85_99, AirlineSafety_adj$fatalities_00_14, data = AirlineSafety_adj, 
       label = AirlineSafety_adj$airline,
       xlab = "1985 - 1999", 
       ylab = "2000 - 2014",
@@ -98,21 +98,25 @@ qplot(AirlineSafety_adj$fatalities_85_99, AirlineSafety_adj$fatalities_00_14, da
   geom_smooth(method = "lm", se = FALSE) +
   geom_point() +
   geom_text(aes(label=ifelse(AirlineSafety_adj$fatalities_00_14>200 | AirlineSafety_adj$fatalities_85_99>450, 
-                              as.character(AirlineSafety$airline), '')), hjust=1.1, vjust=1.1, size = 3)
+                              as.character(AirlineSafety$airline), '')), hjust=-.1, vjust=.1, size = 3)
+
+g1 + expand_limits(x=900, y=1050) ##expand axis limits for better graphical result
 
 # Creating a plot for fatal accidents by Airline
-qplot(AirlineSafety_adj$fatal_accidents_85_99, AirlineSafety_adj$fatal_accidents_00_14, data = AirlineSafety_adj, 
+g2 <- qplot(AirlineSafety_adj$fatal_accidents_85_99, AirlineSafety_adj$fatal_accidents_00_14, data = AirlineSafety_adj, 
       label = AirlineSafety_adj$airline,
       xlab = "1985 - 1999", 
       ylab = "2000 - 2014",
       main = "Fatal Accidents by Airline (adjusted for billion seat km)" ) +
   geom_smooth(method = "lm", se = FALSE) +
-  geom_point () +
+  expand_limits(colour = factor(seq(2, 10, by = 2))) +
+    geom_point () +
   geom_text(aes(label=ifelse(AirlineSafety_adj$fatal_accidents_00_14>2 | AirlineSafety_adj$fatal_accidents_85_99>10, 
-                              as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
+                              as.character(AirlineSafety$airline), '')), hjust= -.1, size = 3)
+g2 + expand_limits(x=13, y=8) ##expand axis limits for better graphical result
 
 # Creating a plot for incidents by Airline
-qplot(AirlineSafety_adj$incidents_85_99, AirlineSafety_adj$incidents_00_14, data = AirlineSafety_adj, 
+g3 <-qplot(AirlineSafety_adj$incidents_85_99, AirlineSafety_adj$incidents_00_14, data = AirlineSafety_adj, 
       label = AirlineSafety_adj$airline,
       xlab = "1985 - 1999", 
       ylab = "2000 - 2014",
@@ -120,4 +124,6 @@ qplot(AirlineSafety_adj$incidents_85_99, AirlineSafety_adj$incidents_00_14, data
   geom_smooth(method = "lm", se = FALSE) +
   geom_point() +
   geom_text(aes(label=ifelse (AirlineSafety_adj$incidents_00_14>15 | AirlineSafety_adj$incidents_85_99>20, 
-                               as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
+                               as.character(AirlineSafety$airline), '')), vjust=1.5, size = 3)
+
+g3 + expand_limits(x=68, y=31) ##expand axis limits for better graphical result
