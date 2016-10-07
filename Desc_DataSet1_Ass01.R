@@ -21,15 +21,13 @@ stat.desc(AirlineSafety, basic = FALSE)
 describe(AirlineSafety)
 
 # adjusting for seat km (creating a function to adjust seat km)
-fun_adjkm <- function(x){ 
+func_adjkm <- function(x){ 
   (x / AirlineSafety$avail_seat_km_per_week)*1000000000
 }
 
-# creating a new data frame adjusting for seat km 
-AirlineSafety_adj <- AirlineSafety[, c(3:8)] #create a subset of data
-fun_adjkm(AirlineSafety_adj) #adjust the data
-AirlineSafety_adj$airline <- AirlineSafety$airline #merge with airlines
-AirlineSafety_adj <- AirlineSafety_adj[,c(7,1,2,3,4,5,6)] #reorder by column number
+# creating a new data frame & adjusting for seat km using the function, created earlier 
+AirlineSafety_adj <- AirlineSafety
+AirlineSafety_adj[, c(3:8)] <- sapply(AirlineSafety_adj[, c(3:8)], func_adjkm)
 
 # descriptive statistics for adjusted data
 summary(AirlineSafety_adj)
@@ -100,7 +98,7 @@ qplot(AirlineSafety_adj$fatalities_85_99, AirlineSafety_adj$fatalities_00_14, da
   geom_smooth(method = "lm", se = FALSE) +
   geom_point() +
   geom_text(aes(label=ifelse(AirlineSafety_adj$fatalities_00_14>200 | AirlineSafety_adj$fatalities_85_99>450, 
-                              as.character(AirlineSafety$airline), '')), hjust=1, vjust=1, size = 3)
+                              as.character(AirlineSafety$airline), '')), hjust=1.1, vjust=1.1, size = 3)
 
 # Creating a plot for fatal accidents by Airline
 qplot(AirlineSafety_adj$fatal_accidents_85_99, AirlineSafety_adj$fatal_accidents_00_14, data = AirlineSafety_adj, 

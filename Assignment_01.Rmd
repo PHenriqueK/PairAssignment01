@@ -18,15 +18,13 @@ getwd()
 source("Data_Assignment01.R")
 
 # adjusting for seat km (creating a function to adjust seat km)
-fun_adjkm <- function(x){ 
+func_adjkm <- function(x){ 
   (x / AirlineSafety$avail_seat_km_per_week)*1000000000
 }
 
-# creating a new data frame adjusting for seat km 
-AirlineSafety_adj <- AirlineSafety[, c(3:8)] #create a subset of data
-fun_adjkm(AirlineSafety_adj) #adjust the data
-AirlineSafety_adj$airline <- AirlineSafety$airline #merge with airlines
-AirlineSafety_adj <- AirlineSafety_adj[,c(7,1,2,3,4,5,6)] #reorder by column number
+# creating a new data frame & adjusting for seat km using the function, created earlier 
+AirlineSafety_adj <- AirlineSafety
+AirlineSafety_adj[, c(3:8)] <- sapply(AirlineSafety_adj[, c(3:8)], func_adjkm)
 
 #Renames the "total_litres_of_pure_alcohol" column to "Total_Alc" in Data Set 2
 Total_Alc <- Alcohol_Raw$total_litres_of_pure_alcohol
