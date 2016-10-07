@@ -25,9 +25,8 @@ getwd()
 # Load Dataset 1 from fivethirthyeight: airline safety 
 AirlineSafety <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/airline-safety/airline-safety.csv", sep = ",", header=TRUE, stringsAsFactors=FALSE)
 names(AirlineSafety)
-AirlineSafety[, 3]  <- as.numeric(AirlineSafety[, 3]
-
+AirlineSafety[, c(3:8)] <- sapply(AirlineSafety[, c(3:8)], as.numeric) ##trying out, how to transform parts of the data frame
 
 # Load Dataset 2 from fivethirtyeight: worldwide alcohol consumption 
-Alcohol_Raw <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/alcohol-consumption/drinks.csv"),
+Alcohol_Raw <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/alcohol-consumption/drinks.csv")
 names(Alcohol_Raw)

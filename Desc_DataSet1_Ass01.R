@@ -37,14 +37,6 @@ stat.desc(AirlineSafety_adj, basic = FALSE)
 describe(AirlineSafety_adj)
 
 # histograms for adjusted data 
-ggplot(AirlineSafety_adj$incidents_85_99, aes(listicle_size)) +
-  geom_histogram(binwidth=1, fill="#c0392b", alpha=0.75) +
-  fte_theme() +
-  labs(title="Incidents between 1985 and 1999 (adjusted for billion seat km)", x="Incidents", y="Frequency") +
-  scale_x_continuous(breaks=seq(0,50, by=5)) +
-  scale_y_continuous(labels=comma) + 
-  geom_hline(yintercept=0, size=0.4, color="black")
-
 hist(AirlineSafety_adj$incidents_85_99,
       main="Incidents between 1985 and 1999 (adjusted for billion seat km)", 
       col="blue", 
