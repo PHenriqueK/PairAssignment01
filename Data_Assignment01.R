@@ -11,6 +11,7 @@
 rm(list=ls())  
 
 # Load Packages: credits to Wickham Hadley, Xie Yihui, Frank Harrell Jr, Philippe Grosejan & Frederic Ibanez
+# (install when needed)
 library(ggplot2)
 library(knitr)
 library(pastecs)
